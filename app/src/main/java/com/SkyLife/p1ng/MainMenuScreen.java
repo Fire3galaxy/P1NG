@@ -17,9 +17,8 @@ import com.daniel.framework.UsersBase;
 
 public class MainMenuScreen extends Screen {
     Paint paint;
-    Context context;
 
-    public MainMenuScreen(UsersBase game, Context c) {
+    public MainMenuScreen(UsersBase game) {
         super(game);
 
         paint = new Paint();
@@ -27,8 +26,6 @@ public class MainMenuScreen extends Screen {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
-
-        context = c;
     }
 
 
@@ -45,7 +42,7 @@ public class MainMenuScreen extends Screen {
 
                 if (inBounds(event, 0, 0, 250, 250)) {
                     //START GAME
-                    u_base.setScreen(new GameScreen(u_base, context));
+                    u_base.setScreen(new GameScreen(u_base));
                 }
 
 

@@ -14,9 +14,8 @@ import com.daniel.framework.UsersBase;
 public class LoadingScreen extends Screen {
     Context context; //
 
-    public LoadingScreen(UsersBase game, Context c) {
+    public LoadingScreen(UsersBase game) {
         super(game);
-        context = c;
     }
 
     @Override
@@ -29,7 +28,7 @@ public class LoadingScreen extends Screen {
         Assets.whizzing = g.newImage("whix.png", Graphics.ImageFormat.RGB565);
         //Assets.click = game.getAudio().createSound("explode.ogg");
 
-        u_base.setScreen(new MainMenuScreen(u_base, context));
+        u_base.setScreen(new MainMenuScreen(u_base));
     }
 
 

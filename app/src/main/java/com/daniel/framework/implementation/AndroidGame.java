@@ -68,16 +68,6 @@ public abstract class AndroidGame extends Activity implements UsersBase {
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, "MyGame");
-
-        wP2p = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
-        wPChan = wP2p.initialize(this, getMainLooper(), null);
-        wDBR = new WiFiDirectBroadcastReceiver(wP2p, wPChan, this);
-
-        mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
 
     @Override
@@ -86,7 +76,6 @@ public abstract class AndroidGame extends Activity implements UsersBase {
         wakeLock.acquire();
         screen.resume();
         renderView.resume();
-        registerReceiver(wDBR, mIntentFilter);
     }
 
     @Override
@@ -98,8 +87,6 @@ public abstract class AndroidGame extends Activity implements UsersBase {
 
         if (isFinishing())
             screen.dispose();
-
-        unregisterReceiver(wDBR);
     }
 
     @Override

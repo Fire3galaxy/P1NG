@@ -42,13 +42,12 @@ public class GameScreen extends Screen {
     int livesLeft = 1;
     Paint paint;
 
-    public GameScreen(UsersBase game, Context c) {
+    public GameScreen(UsersBase game) {
         super(game);
 
         // Initialize game objects here
         av = new Avatar();
-        b = new Ball(-60,context); // speedX default value should be -60
-        context = c;
+        b = new Ball(-60); // speedX default value should be -60
 
         // Defining a paint object
         paint = new Paint();
@@ -148,7 +147,7 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    u_base.setScreen(new MainMenuScreen(u_base, context));
+                    u_base.setScreen(new MainMenuScreen(u_base));
                     return;
                 }
             }
