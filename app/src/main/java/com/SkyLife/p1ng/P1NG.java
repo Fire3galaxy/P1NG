@@ -9,6 +9,7 @@ import com.daniel.framework.implementation.AndroidGame;
 public class P1NG extends AndroidGame{
     @Override
     public Screen getInitScreen() {
-        return new LoadingScreen(this);
+        return new LoadingScreen(this, this.getApplicationContext());
     }
+    // Pass Context all the way up to GameScreen so that Ball can have activity that searches for peers
 }

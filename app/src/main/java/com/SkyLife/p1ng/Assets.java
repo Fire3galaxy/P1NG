@@ -13,5 +13,6 @@ public class Assets {
     public static Image movingball;
     public static Image ball;
     public static Image whizzing;
+
     //public static Sound click;
 }

@@ -1,6 +1,7 @@
 package com.SkyLife.p1ng;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.ImageView;
 
 import com.daniel.framework.Graphics;
@@ -11,8 +12,11 @@ import com.daniel.framework.UsersBase;
  * Created by Daniel on 1/31/2015.
  */
 public class LoadingScreen extends Screen {
-    public LoadingScreen(UsersBase game) {
+    Context context; //
+
+    public LoadingScreen(UsersBase game, Context c) {
         super(game);
+        context = c;
     }
 
     @Override
@@ -25,7 +29,7 @@ public class LoadingScreen extends Screen {
         Assets.whizzing = g.newImage("whix.png", Graphics.ImageFormat.RGB565);
         //Assets.click = game.getAudio().createSound("explode.ogg");
 
-        u_base.setScreen(new MainMenuScreen(u_base));
+        u_base.setScreen(new MainMenuScreen(u_base, context));
     }
 
 

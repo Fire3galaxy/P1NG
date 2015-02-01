@@ -5,8 +5,12 @@ package com.SkyLife.p1ng;
  */
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
 
 
 import com.characters.Avatar;
@@ -16,8 +20,11 @@ import com.daniel.framework.Image;
 import com.daniel.framework.Input.TouchEvent;
 import com.daniel.framework.Screen;
 import com.daniel.framework.UsersBase;
+import com.daniel.framework.WiFiDirectBroadcastReceiver;
 
 public class GameScreen extends Screen {
+    static final String TAG = "GameScreen";
+
     enum GameState {
         Ready, Running, Paused, GameOver
     }
@@ -30,15 +37,18 @@ public class GameScreen extends Screen {
     Avatar av;
     Ball b;
 
+    Context context; // For the external wifi direct
+
     int livesLeft = 1;
     Paint paint;
 
-    public GameScreen(UsersBase game) {
+    public GameScreen(UsersBase game, Context c) {
         super(game);
 
         // Initialize game objects here
         av = new Avatar();
-        b = new Ball(-60); // speedX default value should be -60
+        b = new Ball(-60,context); // speedX default value should be -60
+        context = c;
 
         // Defining a paint object
         paint = new Paint();
@@ -48,6 +58,8 @@ public class GameScreen extends Screen {
         paint.setColor(Color.WHITE);
 
         b.setAnimation(true); // Can enable menu later to prevent animation from ALWAYS running first
+
+        Log.d(TAG, "HERE!");
     }
 
     @Override
@@ -136,7 +148,7 @@ public class GameScreen extends Screen {
                 if (event.x > 300 && event.x < 980 && event.y > 100
                         && event.y < 500) {
                     nullify();
-                    u_base.setScreen(new MainMenuScreen(u_base));
+                    u_base.setScreen(new MainMenuScreen(u_base, context));
                     return;
                 }
             }
