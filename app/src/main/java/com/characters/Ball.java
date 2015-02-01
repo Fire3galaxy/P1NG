@@ -1,12 +1,6 @@
 package com.characters;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.net.wifi.p2p.WifiP2pManager;
-
 import com.SkyLife.p1ng.Assets;
-import com.daniel.framework.WiFiDirectBroadcastReceiver;
 
 /**
  * Created by Daniel on 1/31/2015.
@@ -17,20 +11,12 @@ public class Ball {
         STARTX = 1920, STARTY = 360; // FIXME: replace with function
     boolean animation;
 
-    public Ball(int sX, Context context) {
+    public Ball(int sX) {
         centerX = STARTX;
         centerY = STARTY;
         speedX = sX; //default: 15?
         speedY = GRAVITY; // v_f = v_0 + aT
         animation = false;  // True when ball not dragged
-
-        Activity a = new Activity();
-
-        WifiP2pManager wP2p = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
-        WifiP2pManager.Channel wPChan = wP2p.initialize(context, context.getMainLooper(), null);
-        WiFiDirectBroadcastReceiver wDBR = new WiFiDirectBroadcastReceiver(wP2p, wPChan, a);
-
-        wDBR.onReceive(context,);
     }
 
     // FIXME: Must consider position of avatar in trajectory
@@ -60,10 +46,6 @@ public class Ball {
             }
             // else, speedy <= 0 and speedx >= 0, so ball stay still
         }
-    }
-
-    public void sendBall() {
-
     }
 
     public int getCenterX() {

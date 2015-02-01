@@ -3,7 +3,6 @@ package com.SkyLife.p1ng;
 /**
  * Created by Daniel on 1/31/2015.
  */
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 
@@ -16,19 +15,15 @@ import com.daniel.framework.UsersBase;
 
 
 public class MainMenuScreen extends Screen {
-    Paint paint;
-    Context context;
+    Paint paint = new Paint();
 
-    public MainMenuScreen(UsersBase game, Context c) {
+    public MainMenuScreen(UsersBase game) {
         super(game);
 
-        paint = new Paint();
         paint.setTextSize(50);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
-
-        context = c;
     }
 
 
@@ -45,7 +40,7 @@ public class MainMenuScreen extends Screen {
 
                 if (inBounds(event, 0, 0, 250, 250)) {
                     //START GAME
-                    u_base.setScreen(new GameScreen(u_base, context));
+                    u_base.setScreen(new GameScreen(u_base));
                 }
 
 
