@@ -5,10 +5,12 @@ package com.daniel.framework.implementation;
  */
 import android.app.Activity;
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Point;
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -22,6 +24,7 @@ import com.daniel.framework.Graphics;
 import com.daniel.framework.Input;
 import com.daniel.framework.Screen;
 import com.daniel.framework.UsersBase;
+import com.daniel.framework.WiFiDirectBroadcastReceiver;
 
 public abstract class AndroidGame extends Activity implements UsersBase {
     AndroidFastRenderView renderView;
@@ -31,6 +34,10 @@ public abstract class AndroidGame extends Activity implements UsersBase {
     FileIO fileIO;
     Screen screen;
     WakeLock wakeLock;
+    WifiP2pManager wP2p;
+    WifiP2pManager.Channel wPChan;
+    WiFiDirectBroadcastReceiver wDBR;
+    IntentFilter mIntentFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +68,16 @@ public abstract class AndroidGame extends Activity implements UsersBase {
 
         PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, "MyGame");
+
+        wP2p = (WifiP2pManager) getSystemService(Context.WIFI_P2P_SERVICE);
+        wPChan = wP2p.initialize(this, getMainLooper(), null);
+        wDBR = new WiFiDirectBroadcastReceiver(wP2p, wPChan, this);
+
+        mIntentFilter = new IntentFilter();
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
+        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
     }
 
     @Override
@@ -69,6 +86,7 @@ public abstract class AndroidGame extends Activity implements UsersBase {
         wakeLock.acquire();
         screen.resume();
         renderView.resume();
+        registerReceiver(wDBR, mIntentFilter);
     }
 
     @Override
@@ -80,6 +98,8 @@ public abstract class AndroidGame extends Activity implements UsersBase {
 
         if (isFinishing())
             screen.dispose();
+
+        unregisterReceiver(wDBR);
     }
 
     @Override

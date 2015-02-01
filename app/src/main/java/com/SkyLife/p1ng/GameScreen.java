@@ -150,7 +150,10 @@ public class GameScreen extends Screen {
 
         // First draw the game elements.
         g.drawImage(Assets.bg1, 0, 0);
-        g.drawImage(Assets.movingball, b.getCenterX(), b.getCenterY());
+
+        if (b.getCenterY() != b.getFLOOR()) g.drawImage(Assets.movingball, b.getCenterX(), b.getCenterY());
+        else g.drawImage(Assets.ball, b.getCenterX(), b.getCenterY());
+
         g.drawImage(Assets.avatar, av.getCenterX(), av.getCenterY());
 
         // Example:

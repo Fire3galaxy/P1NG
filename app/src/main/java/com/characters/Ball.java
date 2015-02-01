@@ -1,5 +1,7 @@
 package com.characters;
 
+import com.SkyLife.p1ng.Assets;
+
 /**
  * Created by Daniel on 1/31/2015.
  */
@@ -84,5 +86,9 @@ public class Ball {
 
     public void setAnimation(boolean animation) {
         this.animation = animation;
+    }
+
+    public int getFLOOR() {
+        return FLOOR;
     }
 }
