@@ -38,7 +38,7 @@ public class GameScreen extends Screen {
 
         // Initialize game objects here
         av = new Avatar();
-        b = new Ball(-60); // speedX default value should be -15
+        b = new Ball(-60); // speedX default value should be -60
 
         // Defining a paint object
         paint = new Paint();
@@ -89,12 +89,19 @@ public class GameScreen extends Screen {
         for (int i = 0; i < len; i++) {
             TouchEvent event = touchEvents.get(i);
 
+            if (event.type == TouchEvent.TOUCH_DRAGGED) {
+                b.setCenterX(event.x);
+                b.setCenterY(event.y);
+                b.update();
+            }
+
             if (event.type == TouchEvent.TOUCH_DOWN) {
                 b.setCenterX(event.x);
                 b.setCenterY(event.y);
             }
 
             if (event.type == TouchEvent.TOUCH_UP) {
+                b.setSpeedX(0); // FIXME: Cheating solution.
                 b.setAnimation(true);
             }
         }

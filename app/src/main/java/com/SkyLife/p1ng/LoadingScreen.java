@@ -1,5 +1,8 @@
 package com.SkyLife.p1ng;
 
+import android.app.Activity;
+import android.widget.ImageView;
+
 import com.daniel.framework.Graphics;
 import com.daniel.framework.Screen;
 import com.daniel.framework.UsersBase;

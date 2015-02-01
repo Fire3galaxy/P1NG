@@ -14,6 +14,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 //import com.daniel.framework.Audio;
 import com.daniel.framework.FileIO;

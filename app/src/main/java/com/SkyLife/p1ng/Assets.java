@@ -1,5 +1,7 @@
 package com.SkyLife.p1ng;
 
+import android.widget.ImageView;
+
 import com.daniel.framework.Image;
 
 /**

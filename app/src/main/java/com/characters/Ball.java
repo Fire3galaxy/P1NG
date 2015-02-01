@@ -14,7 +14,7 @@ public class Ball {
         centerY = STARTY;
         speedX = sX; //default: 15?
         speedY = GRAVITY; // v_f = v_0 + aT
-        animation = false;  // True when ball not at y = 0 (854)
+        animation = false;  // True when ball not dragged
     }
 
     // FIXME: Must consider position of avatar in trajectory
@@ -34,7 +34,9 @@ public class Ball {
                     speedX += friction; // X on floor -> (friction)
                     if (speedX > 0) speedX = 0; // stop
                     else centerX += speedX; // slower
-                } else centerX += speedX;
+                } else {
+                    centerX += speedX;
+                }
             } else if (speedX < 0) {    // on floor, moving
                 speedX += friction; // friction
                 if (speedX > 0) speedX = 0; // stop
