@@ -5,7 +5,6 @@ package com.daniel.framework.implementation;
  */
 import android.app.Activity;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -24,7 +23,6 @@ import com.daniel.framework.Graphics;
 import com.daniel.framework.Input;
 import com.daniel.framework.Screen;
 import com.daniel.framework.UsersBase;
-import com.daniel.framework.WiFiDirectBroadcastReceiver;
 
 public abstract class AndroidGame extends Activity implements UsersBase {
     AndroidFastRenderView renderView;
@@ -34,10 +32,6 @@ public abstract class AndroidGame extends Activity implements UsersBase {
     FileIO fileIO;
     Screen screen;
     WakeLock wakeLock;
-    WifiP2pManager wP2p;
-    WifiP2pManager.Channel wPChan;
-    WiFiDirectBroadcastReceiver wDBR;
-    IntentFilter mIntentFilter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

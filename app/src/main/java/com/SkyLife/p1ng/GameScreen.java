@@ -20,7 +20,6 @@ import com.daniel.framework.Image;
 import com.daniel.framework.Input.TouchEvent;
 import com.daniel.framework.Screen;
 import com.daniel.framework.UsersBase;
-import com.daniel.framework.WiFiDirectBroadcastReceiver;
 
 public class GameScreen extends Screen {
     static final String TAG = "GameScreen";
