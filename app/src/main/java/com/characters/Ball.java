@@ -1,14 +1,24 @@
 package com.characters;
 
 
+import android.app.Activity;
+
+import com.daniel.framework.MyBluetooth;
+
 /**
  * Created by Daniel on 1/31/2015.
  */
 public class Ball {
     int centerX, centerY,speedX, speedY,radius;
-    final int GRAVITY = 2, FLOOR = 854, // positive = DOWN
-        STARTX = 1920, STARTY = 360; // FIXME: replace with function
+    final int GRAVITY = 3, FLOOR = 854; // positive = DOWN
+    final int STARTX = 1920, STARTY = 360; // FIXME: replace with function
     boolean animation;
+
+    int prevX = -1, totalEventsX = 0;
+    int prevY = -1, totalEventsY = 0;
+
+    MyBluetooth myBlue;
+    Activity a;
 
     public Ball(int sX) {
         centerX = STARTX;
@@ -16,6 +26,18 @@ public class Ball {
         speedX = sX; //default: 15?
         speedY = GRAVITY; // v_f = v_0 + aT
         animation = false;  // True when ball not dragged
+
+//        new Thread() {
+//            public void run() {
+//                a = new Activity();
+//
+//                a.runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        myBlue = new MyBluetooth();
+//                    }
+//                });
+//            }
+//        }.start();
 
     }
 
@@ -46,6 +68,20 @@ public class Ball {
             }
             // else, speedy <= 0 and speedx >= 0, so ball stay still
         }
+    }
+
+    public void addVelocity(int currX, int currY) {
+        if (prevX != -1) {
+            speedX = currX - prevX;
+            speedY = currY - prevY;
+        }
+        prevX = currX;
+        prevY = currY;
+    }
+
+    public void resetPrevCoord() {
+        prevX = -1;
+        prevY = -1;
     }
 
     public void sendBall() {

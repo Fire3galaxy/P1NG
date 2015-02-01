@@ -103,6 +103,8 @@ public class GameScreen extends Screen {
                 b.setCenterX(event.x);
                 b.setCenterY(event.y);
                 b.update();
+
+                b.addVelocity(event.x, event.y); // for throws
             }
 
             if (event.type == TouchEvent.TOUCH_DOWN) {
@@ -111,8 +113,8 @@ public class GameScreen extends Screen {
             }
 
             if (event.type == TouchEvent.TOUCH_UP) {
-                b.setSpeedX(0); // FIXME: Cheating solution.
                 b.setAnimation(true);
+                b.resetPrevCoord();
             }
         }
 
